@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Image, Item, Icon, Divider, Button, Label, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { voteUpCreator, voteDownCreator } from '../actions/post-actions'
+import { voteUpPost, voteDownPost } from '../actions/post-actions'
 import { Link } from 'react-router-dom'
 
 class SinglePost extends Component {
@@ -13,11 +13,11 @@ class SinglePost extends Component {
     }
 
     voteUp = () => {
-        this.props.dispatch(voteUpCreator(this.props.post))
+        this.props.dispatch(voteUpPost(this.props.post))
     }
 
     voteDown = () => {
-        this.props.dispatch(voteDownCreator(this.props.post))
+        this.props.dispatch(voteDownPost(this.props.post))
     }
 
     setEditMode = () => {
@@ -34,8 +34,11 @@ class SinglePost extends Component {
     }
 
     componentDidMount() {
-        this.state.body = this.props.post.body,
-            this.state.title = this.props.post.title
+        this.setState({
+            editMode: this.props.editMode,
+            body: this.props.post.body,
+            title: this.props.post.title
+        })
     }
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })

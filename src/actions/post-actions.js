@@ -1,13 +1,20 @@
 import * as API from '../util/API'
 
 export const POSTS_LOADED = 'POSTS_LOADED'
+export const CREATE_POST = 'CREATE_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const VOTE_UP_POST = 'VOTE_UP_POST'
 export const VOTE_DOWN_POST = 'VOTE_DOWN_POST'
-export const COMMENT_ADDED_TO_POST = 'COMMENT_ADDED_TO_POST'
-export const COMMENT_DELETED_FROM_POST = 'COMMENT_DELETED_FROM_POST'
-export const CREATE_POST = 'CREATE_POST'
+export const VOTE_UP_OPTION = "upVote"
+export const VOTE_DOWN_OPTION = "downVote"
 
+// initial posts loading
+export const postsLoadedCreator = posts => ({
+    type: POSTS_LOADED,
+    posts
+});
+
+// delete post
 const deletePostActionCreator = (post) => ({
     type: DELETE_POST,
     post
@@ -19,6 +26,7 @@ export const deletePost = (post) => dispatch => (
     )
 );
 
+// create post
 const createPostActionCreator = (post) => ({
     type: CREATE_POST,
     post
@@ -33,17 +41,20 @@ export const createPost = (author, title, body, category, postCreated) => dispat
     )
 );
 
-export const postsLoadedCreator = posts => ({
-    type: POSTS_LOADED,
-    posts
-});
-
-export const voteUpCreator = post => ({
-    type: VOTE_UP_POST,
+// posts voting
+export const postVoteActionCreator = (option, post) => ({
+    type: option,
     post
 });
 
-export const voteDownCreator = post => ({
-    type: VOTE_DOWN_POST,
-    post
-});
+export const voteUpPost = (post) => dispatch => (
+    API.voteForPost(post.id, VOTE_UP_OPTION).then(
+        post => dispatch(postVoteActionCreator(VOTE_UP_POST, post))
+    )
+);
+
+export const voteDownPost = (post) => dispatch => (
+    API.voteForPost(post.id, VOTE_DOWN_OPTION).then(
+        post => dispatch(postVoteActionCreator(VOTE_DOWN_POST, post))
+    )
+);

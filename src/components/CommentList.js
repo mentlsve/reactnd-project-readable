@@ -20,7 +20,7 @@ class CommentList extends Component {
     handleSubmit = () => {
         const { author, body } = this.state
         this.setState({ submittedAuthor: author, submittedBody: body });
-        this.props.dispatch(addComment(this.state.author, this.state.body, '8xf0y6ziyjabvozdd253nd' ));
+        this.props.dispatch(addComment(this.state.author, this.state.body, this.props.post.id ));
         this.state.author = ''
         this.state.body = ''
     }

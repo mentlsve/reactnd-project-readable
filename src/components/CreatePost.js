@@ -47,7 +47,7 @@ class CreatePost extends Component {
     render() {
         return (
             <div className="ui left aligned container">
-            <ToastContainer />
+            <ToastContainer autoClose={2000}/>
             <h2>Create a new post</h2>
                 <Form reply onSubmit={this.handleSubmit} >
                     <Form.Input required label='Author' name='author' value={this.state.author} onChange={this.handleChange} />

@@ -51,7 +51,7 @@ export default function postReducer(state = initialState, action) {
             }
         case VOTE_UP_POST:
             post = { ...state.posts.find(post => post.id === action.post.id) }
-            post.voteScore = post.voteScore - 1
+            post.voteScore = post.voteScore + 1
             return {
                 ...state,
                 posts: updatePostInArray(state.posts, post)

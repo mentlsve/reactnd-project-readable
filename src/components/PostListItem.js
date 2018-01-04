@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import { Image, Item, Icon, Divider, Button, Label } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { voteUpCreator, voteDownCreator, deletePost } from '../actions/post-actions'
+import { voteUpPost, voteDownPost, deletePost } from '../actions/post-actions'
 import { Link } from 'react-router-dom'
 import Timestamp from 'react-timestamp';
 
 class PostListItem extends Component {
 
     voteUp = () => {
-        this.props.dispatch(voteUpCreator(this.props.post))
+        this.props.dispatch(voteUpPost(this.props.post))
     }
 
     voteDown = () => {
-        this.props.dispatch(voteDownCreator(this.props.post))
+        this.props.dispatch(voteDownPost(this.props.post))
     }
 
     handleDelete = () => {
@@ -58,7 +58,14 @@ class PostListItem extends Component {
                         <Label as='a' basic pointing='left'>{this.props.post.commentCount}</Label>
                     </Button>
                     <Button icon basic floated='right'>
+
+
+                    <Link to={{
+                        pathname: '/' + this.props.post.category + '/' + this.props.post.id,
+                        state: { editMode: true }
+                    }}>
                         <Icon name='edit' />
+                    </Link>
                     </Button>
                     <Button icon basic floated='right' onClick={this.handleDelete}>
                         <Icon name='trash' />

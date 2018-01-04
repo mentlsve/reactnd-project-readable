@@ -83,6 +83,19 @@ export const voteForComment = (commentId, option) => {
   }).then(res => res.json())
 }
 
+export const voteForPost = (postId, option) => {
+  const payload = {
+    timestamp: Date.now(),
+    option
+  }
+
+  return fetch(`${api}/posts/${postId}`, {
+    method: 'POST',
+    headers: headersForJSONPayload,
+    body: JSON.stringify(payload)
+  }).then(res => res.json())
+}
+
 export const createPost = (author, title, body, category) => {
   const payload = {
     id: uuid(),
