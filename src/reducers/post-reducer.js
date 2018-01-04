@@ -1,8 +1,9 @@
 import {
-    ADD_POST,
+    CREATE_POST,
     POSTS_LOADED,
     VOTE_UP_POST,
-    VOTE_DOWN_POST
+    VOTE_DOWN_POST,
+    DELETE_POST
 } from '../actions/post-actions'
 
 import {
@@ -30,6 +31,12 @@ function updatePostInArray(posts, modifiedPost) {
         console.log(a.id.localeCompare(b.id))
         return a.id.localeCompare(b.id)
     });
+}
+
+function insertPost(posts, post) {
+    let newArray = posts.slice();
+    newArray.splice(0, 0, post);
+    return newArray;
 }
 
 export default function postReducer(state = initialState, action) {
@@ -69,6 +76,16 @@ export default function postReducer(state = initialState, action) {
             return {
                 ...state,
                 posts: updatePostInArray(state.posts, post)
+            }
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(post => post.id !== action.post.id)
+            }
+        case CREATE_POST:
+            return {
+                ...state,
+                posts: insertPost(state.posts, action.post)
             }
         default:
             return state;

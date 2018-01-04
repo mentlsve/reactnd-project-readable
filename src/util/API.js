@@ -50,6 +50,12 @@ export const deleteComment = (commentId) =>
     headers: headers
   }).then(res => res.json())
 
+export const deletePost = (postId) =>
+  fetch(`${api}/posts/${postId}`, {
+    method: 'DELETE',
+    headers: headers
+  }).then(res => res.json())
+
 export const updateComment = (commentId, body) => {
   const payload = {
     timestamp: Date.now(),
@@ -71,6 +77,25 @@ export const voteForComment = (commentId, option) => {
   }
 
   return fetch(`${api}/comments/${commentId}`, {
+    method: 'POST',
+    headers: headersForJSONPayload,
+    body: JSON.stringify(payload)
+  }).then(res => res.json())
+}
+
+export const createPost = (author, title, body, category) => {
+  const payload = {
+    id: uuid(),
+    timestamp: Date.now(),
+    title: title,
+    body: body,
+    author: author,
+    category: category
+  }
+
+  console.log("payload", payload)
+
+  return fetch(`${api}/posts`, {
     method: 'POST',
     headers: headersForJSONPayload,
     body: JSON.stringify(payload)
