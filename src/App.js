@@ -2,21 +2,56 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import PostList from './components/PostList'
+import { Link, Route } from 'react-router-dom'
+import { Menu } from 'semantic-ui-react'
+import CreatePost from './components/CreatePost'
+import PostDetailView from './components/PostDetailView'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <div class="ui left aligned container">
-          <PostList />
+        <div>
+          <Menu>
+            <Menu.Item header>Categories</Menu.Item>
+            <Menu.Item as={Link} to='/'>
+              All
+            </Menu.Item>
+            <Menu.Item as={Link} to='/react'>
+              React
+            </Menu.Item>
+            <Menu.Item as={Link} to='/redux'>
+              Redux
+            </Menu.Item>
+            <Menu.Item as={Link} to='/udacity'>
+              Udacity
+            </Menu.Item>
+            <Menu.Menu position='right'>
+              <Menu.Item as={Link} to='/create-post'>
+                Create new post
+            </Menu.Item>
+            </Menu.Menu>
+          </Menu>
         </div>
+
+        <Route path="/" exact render={() => (
+          <PostList />
+        )} />
+
+        <Route path="/udacity" exact render={() => (
+          <PostList category='udacity' />
+        )} />
+
+        <Route path="/redux" exact render={() => (
+          <PostList category='redux' />
+        )} />
+
+        <Route path="/react" exact render={() => (
+          <PostList category='react' />
+        )} />
+
+        <Route path="/create-post" component={CreatePost} />
+        <Route path="/posts/:id" component={PostDetailView} />
 
       </div>
     );

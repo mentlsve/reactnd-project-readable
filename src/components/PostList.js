@@ -1,25 +1,35 @@
 import React, { Component } from 'react'
-import * as API from './API'
-import Post from './Post'
-import { Image, Item } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+
+import PostListItem from './PostListItem'
+import { Image, Item } from 'semantic-ui-react'
+
 
 class PostList extends Component {
 
     render() {
         console.log('props', this.props)
+
+        let posts = []
+
+        if(this.props.posts && this.props.posts.length > 0) {
+            posts = this.props.category ? this.props.posts.filter(post => post.category === this.props.category) : this.props.posts
+        }
+
         return (
+            <div className="ui left aligned container">
             <Item.Group>
-                {this.props.posts.length > 0 && this.props.posts.map(e =>
-                    <Item><Post post={e} /></Item>
+                {   posts.map(e =>
+                            <Item key={e.id}><PostListItem post={e} /></Item>
                 )}
             </Item.Group>
+            </div>
         );
     }
 }
 
-const mapStateToProps = (store) => ({
-    posts: store.posts
+const mapStateToProps = ({postReducer, commentReducer}) => ({
+    posts: postReducer.posts
 })
 
 

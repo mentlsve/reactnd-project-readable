@@ -26,3 +26,11 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.meta {
+  display: inline;
+}
+
+.meta .value {
+  font-style: italic
+}
