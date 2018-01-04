@@ -40,3 +40,12 @@ export const addComment = (author, body, parentId) => {
     body: JSON.stringify(payload)
   }).then(res => res.json())
 }
+
+export const deleteComment = (commentId) =>
+  fetch(`${api}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json())

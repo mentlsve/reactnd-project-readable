@@ -1,6 +1,7 @@
 import {
     RECEIVE_COMMENTS,
-    RECEIVE_COMMENT
+    RECEIVE_COMMENT,
+    DELETE_COMMENT
 } from '../actions/comment-actions'
 
 const initialState = {
@@ -21,6 +22,11 @@ export default function commentReducer(state = initialState, action) {
                     ...state.comments,
                     action.comment
                 ]
+            }
+        case DELETE_COMMENT:
+            return {
+                ...state,
+                comments: state.comments.filter(comment => comment.id !== action.comment.id)
             }
         default:
             return state;

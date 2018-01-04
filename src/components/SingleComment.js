@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
-import { Comment } from 'semantic-ui-react'
+import { Comment, Icon, Button, Label } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { deleteComment } from '../actions/comment-actions'
 
 class SingleComment extends Component {
+
+    handleDelete = () => {
+        this.props.dispatch(deleteComment(this.props.comment))
+    }
+
     render() {
         return (
             <Comment>
@@ -10,11 +17,23 @@ class SingleComment extends Component {
                     <Comment.Metadata>
                         <div>{this.props.comment.timestamp}</div>
                     </Comment.Metadata>
+                    <Comment.Metadata>
+                        <div>Vote score {this.props.comment.voteScore}</div>
+                    </Comment.Metadata>
                     <Comment.Text>{this.props.comment.body}</Comment.Text>
                     <Comment.Actions>
-                        <Comment.Action>Vote up</Comment.Action>
-                        <Comment.Action>Vote down</Comment.Action>
-                        <Comment.Action>Edit</Comment.Action>
+                        <Comment.Action>
+                            <a>Vote up</a>
+                        </Comment.Action>
+                        <Comment.Action>
+                            <a>Vote down</a>
+                        </Comment.Action>
+                        <Comment.Action>
+                            <a>Edit</a>
+                        </Comment.Action>
+                        <Comment.Action>
+                            <a onClick={this.handleDelete}>Delete</a>
+                        </Comment.Action>
                     </Comment.Actions>
                 </Comment.Content>
             </Comment>
@@ -22,4 +41,4 @@ class SingleComment extends Component {
     }
 }
 
-export default SingleComment
+export default connect()(SingleComment)
