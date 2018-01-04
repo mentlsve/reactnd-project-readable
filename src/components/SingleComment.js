@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Comment, Icon, Button, Label, Form, Divider } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { deleteComment, updateComment } from '../actions/comment-actions'
+import { deleteComment, updateComment, voteUpComment, voteDownComment} from '../actions/comment-actions'
 
 class SingleComment extends Component {
 
@@ -35,6 +35,14 @@ class SingleComment extends Component {
         this.props.dispatch(deleteComment(this.props.comment))
     }
 
+    voteUp = () => {
+        this.props.dispatch(voteUpComment(this.props.comment))
+    }
+
+    voteDown = () => {
+        this.props.dispatch(voteDownComment(this.props.comment))
+    }
+
     render() {
         return (
             <div>
@@ -49,10 +57,10 @@ class SingleComment extends Component {
                         </Comment.Metadata>
                         <Comment.Text>{this.props.comment.body}</Comment.Text>
                         <Comment.Actions>
-                            <Comment.Action>
+                            <Comment.Action onClick={this.voteUp}>
                                 Vote up
                             </Comment.Action>
-                            <Comment.Action>
+                            <Comment.Action onClick={this.voteDown}>
                                 Vote down
                             </Comment.Action>
                             <Comment.Action onClick={this.setEditMode}>

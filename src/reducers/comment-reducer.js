@@ -1,6 +1,6 @@
 import {
     RECEIVE_COMMENTS,
-    RECEIVE_COMMENT,
+    ADD_COMMENT,
     DELETE_COMMENT,
     UPDATE_COMMENT
 } from '../actions/comment-actions'
@@ -31,7 +31,7 @@ export default function commentReducer(state = initialState, action) {
                 ...state,
                 comments: action.comments
             }
-        case RECEIVE_COMMENT:
+        case ADD_COMMENT:
             return {
                 ...state,
                 comments: [

@@ -62,3 +62,17 @@ export const updateComment = (commentId, body) => {
     body: JSON.stringify(payload)
   }).then(res => res.json())
 }
+
+
+export const voteForComment = (commentId, option) => {
+  const payload = {
+    timestamp: Date.now(),
+    option
+  }
+
+  return fetch(`${api}/comments/${commentId}`, {
+    method: 'POST',
+    headers: headersForJSONPayload,
+    body: JSON.stringify(payload)
+  }).then(res => res.json())
+}
