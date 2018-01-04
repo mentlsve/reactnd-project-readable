@@ -6,9 +6,10 @@ import { Header, Comment } from 'semantic-ui-react'
 import SinglePost from './SinglePost'
 import CommentList from './CommentList'
 
-class PostDetail extends Component {
+class PostDetailView extends Component {
 
     render(){
+        console.log('this.props',this.props)
         const post = this.props.posts.find(post=> post.id === this.props.id)
         return (
             <div className="ui left aligned container">
@@ -23,10 +24,10 @@ class PostDetail extends Component {
 function mapStateToProps({ postReducer, commentReducer}, ownProps) {
     console.log("mapStateToProps called")
     return {
-        id: ownProps.match.params.id,
+        id: ownProps.match.params.post_id,
         posts: postReducer.posts,
         comments: commentReducer.comments
     }
 }
 
-export default connect(mapStateToProps)(PostDetail)
+export default connect(mapStateToProps)(PostDetailView)

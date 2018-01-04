@@ -51,7 +51,7 @@ class App extends Component {
         )} />
 
         <Route path="/create-post" component={CreatePost} />
-        <Route path="/posts/:id" component={PostDetailView} />
+        <Route path="/:category/:post_id" component={PostDetailView} />
 
       </div>
     );

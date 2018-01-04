@@ -18,7 +18,7 @@ class PostListItem extends Component {
         return (
             <Item.Content>
                 <Item.Header>
-                    <Link to={'/posts/'+this.props.post.id}>
+                    <Link to={'/'+this.props.post.category+'/'+this.props.post.id}>
                         {this.props.post.title} (Current score: {this.props.post.voteScore})
                     </Link>
                 </Item.Header>
