@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Comment, Icon, Button, Label, Form, Divider } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { deleteComment, updateComment, voteUpComment, voteDownComment} from '../actions/comment-actions'
+import Timestamp from 'react-timestamp';
 
 class SingleComment extends Component {
 
@@ -50,7 +51,7 @@ class SingleComment extends Component {
                     <Comment.Content>
                         <Comment.Author as='a'>{this.props.comment.author}</Comment.Author>
                         <Comment.Metadata>
-                            <div>{this.props.comment.timestamp}</div>
+                            <div>on <Timestamp time={new Date(this.props.comment.timestamp)} format='full' /></div>
                         </Comment.Metadata>
                         <Comment.Metadata>
                             <div>Vote score {this.props.comment.voteScore}</div>

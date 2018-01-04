@@ -2,7 +2,9 @@ import {
     RECEIVE_COMMENTS,
     ADD_COMMENT,
     DELETE_COMMENT,
-    UPDATE_COMMENT
+    UPDATE_COMMENT,
+    VOTE_DOWN_COMMENT,
+    VOTE_UP_COMMENT
 } from '../actions/comment-actions'
 
 const initialState = {
@@ -41,12 +43,19 @@ export default function commentReducer(state = initialState, action) {
             }
         case UPDATE_COMMENT:
             return {
+                ...state,
                 comments: updateCommentInArray(state.comments, action.comment)
             }
         case DELETE_COMMENT:
             return {
                 ...state,
                 comments: state.comments.filter(comment => comment.id !== action.comment.id)
+            }
+        case VOTE_DOWN_COMMENT:
+        case VOTE_UP_COMMENT:
+            return {
+                ...state,
+                comments: updateCommentInArray(state.comments, action.comment)
             }
         default:
             return state;
