@@ -1,11 +1,27 @@
 import {
     RECEIVE_COMMENTS,
     RECEIVE_COMMENT,
-    DELETE_COMMENT
+    DELETE_COMMENT,
+    UPDATE_COMMENT
 } from '../actions/comment-actions'
 
 const initialState = {
     comments: []
+}
+
+function updateCommentInArray(comments, modifiedComment) {
+    let newArray = comments.map( (comment, index) => {
+        console.log(comment.id, modifiedComment.id)
+        if(comment.id !== modifiedComment.id) {
+            return comment;
+        } else {
+            return {
+                ...modifiedComment
+            }
+        }
+    });
+    console.log("newArray", newArray)
+    return newArray;
 }
 
 export default function commentReducer(state = initialState, action) {
@@ -23,6 +39,10 @@ export default function commentReducer(state = initialState, action) {
                     action.comment
                 ]
             }
+        case UPDATE_COMMENT:
+            return {
+                comments: updateCommentInArray(state.comments, action.comment)
+            }
         case DELETE_COMMENT:
             return {
                 ...state,
@@ -32,3 +52,4 @@ export default function commentReducer(state = initialState, action) {
             return state;
     }
 }
+

@@ -22,7 +22,7 @@ class PostDetailView extends Component {
 }
 
 function mapStateToProps({ postReducer, commentReducer}, ownProps) {
-    console.log("mapStateToProps called")
+    console.log("PostDetailView mapStateToProps called")
     return {
         id: ownProps.match.params.post_id,
         posts: postReducer.posts,

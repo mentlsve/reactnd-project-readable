@@ -38,11 +38,17 @@ class CommentList extends Component {
                 <Form reply onSubmit={this.handleSubmit}>
                     <Form.Input required label='Author' placeholder='Your name' name='author' value={this.state.author} onChange={this.handleChange} />
                     <Form.TextArea required value={this.state.body} name='body' onChange={this.handleChange} />
-                    <Button content='Add Comment' labelPosition='left' icon='edit' primary />
+                    <Button content='Add Comment' labelPosition='left' icon='edit' type='submit' primary />
                 </Form>
             </Comment.Group>
         )
     }
 }
 
-export default connect()(CommentList)
+function mapStateToProps({ postReducer, commentReducer}, ownProps) {
+    console.log("CommentList mapStateToProps called")
+    return {
+        comments: commentReducer.comments
+    }
+}
+export default connect(mapStateToProps)(CommentList)

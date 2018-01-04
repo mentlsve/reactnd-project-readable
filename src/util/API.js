@@ -12,6 +12,12 @@ const headers = {
   'Authorization': token
 }
 
+const headersForJSONPayload = {
+  'Accept': 'application/json',
+  'Authorization': token,
+  'Content-Type': 'application/json'
+}
+
 export const getAllPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json())
@@ -33,10 +39,7 @@ export const addComment = (author, body, parentId) => {
 
   return fetch(`${api}/comments`, {
     method: 'POST',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
+    headers: headersForJSONPayload,
     body: JSON.stringify(payload)
   }).then(res => res.json())
 }
@@ -44,8 +47,18 @@ export const addComment = (author, body, parentId) => {
 export const deleteComment = (commentId) =>
   fetch(`${api}/comments/${commentId}`, {
     method: 'DELETE',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    }
+    headers: headers
   }).then(res => res.json())
+
+export const updateComment = (commentId, body) => {
+  const payload = {
+    timestamp: Date.now(),
+    body: body
+  }
+
+  return fetch(`${api}/comments/${commentId}`, {
+    method: 'PUT',
+    headers: headersForJSONPayload,
+    body: JSON.stringify(payload)
+  }).then(res => res.json())
+}
