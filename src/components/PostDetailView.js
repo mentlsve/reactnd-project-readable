@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { Header, Comment } from 'semantic-ui-react'
-
 import SinglePost from './SinglePost'
 import CommentList from './CommentList'
 

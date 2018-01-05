@@ -3,13 +3,12 @@ import {
     POSTS_LOADED,
     VOTE_UP_POST,
     VOTE_DOWN_POST,
-    DELETE_POST
+    DELETE_POST,
+    UPDATE_POST
 } from '../actions/post-actions'
 
 import {
     ADD_COMMENT,
-    VOTE_UP_COMMENT,
-    VOTE_DOWN_COMMENT,
     DELETE_COMMENT
 } from '../actions/comment-actions'
 
@@ -86,6 +85,11 @@ export default function postReducer(state = initialState, action) {
             return {
                 ...state,
                 posts: insertPost(state.posts, action.post)
+            }
+        case UPDATE_POST:
+            return {
+                ...state,
+                posts: updatePostInArray(state.posts, action.post)
             }
         default:
             return state;

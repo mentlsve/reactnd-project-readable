@@ -9,8 +9,6 @@ class CommentList extends Component {
     state = {
         author: '',
         body: '',
-        submittedAuthor: '',
-        submittedBody: ''
     }
 
     componentDidMount() {
@@ -18,11 +16,8 @@ class CommentList extends Component {
     }
 
     handleSubmit = () => {
-        const { author, body } = this.state
-        this.setState({ submittedAuthor: author, submittedBody: body });
+        this.setState({ author: '', body:'' });
         this.props.dispatch(addComment(this.state.author, this.state.body, this.props.post.id ));
-        this.state.author = ''
-        this.state.body = ''
     }
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })

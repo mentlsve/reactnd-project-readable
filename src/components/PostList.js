@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import PostListItem from './PostListItem'
-import { Image, Item, Menu } from 'semantic-ui-react'
+import { Item, Menu } from 'semantic-ui-react'
 
 import sortBy from 'sort-by'
 

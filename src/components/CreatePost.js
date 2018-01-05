@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button, Dropdown } from 'semantic-ui-react'
+import { Form, Button } from 'semantic-ui-react'
 import { createPost } from '../actions/post-actions'
 import { connect } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify'

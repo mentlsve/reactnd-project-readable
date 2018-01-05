@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Image, Item, Icon, Divider, Button, Label, Form } from 'semantic-ui-react'
+import { Item, Icon, Divider, Button, Label, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { voteUpPost, voteDownPost } from '../actions/post-actions'
-import { Link } from 'react-router-dom'
+import { voteUpPost, voteDownPost, updatePost } from '../actions/post-actions'
 
 class SinglePost extends Component {
 
@@ -43,6 +42,15 @@ class SinglePost extends Component {
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
+    handleSubmit = () => {
+        this.props.dispatch(updatePost(this.props.post, this.state.title, this.state.body));
+        this.setState({
+            editMode: false,
+            body: '',
+            title: ''
+        })
+    }
+
     render() {
         return (
             <div>
@@ -75,9 +83,6 @@ class SinglePost extends Component {
                                     <Button icon basic onClick={this.setEditMode} floated='right'>
                                         <Icon name='edit' />
                                     </Button>
-                                    <Button icon basic floated='right'>
-                                        <Icon name='trash' />
-                                    </Button>
                                 </Item.Extra>
                                 <Item.Header>
                                     {this.props.post.title}
@@ -91,12 +96,12 @@ class SinglePost extends Component {
                     </Item.Group>
                 }
                 {this.state.editMode &&
-                    <Form reply >
+                    <Form reply onSubmit={this.handleSubmit}>
                         <Item.Content>
                             <Item.Description>
                                 <Form.Input required label='Title' name='title' value={this.state.title} onChange={this.handleChange} />
                                 <Form.TextArea required label='Body' value={this.state.body} name='body' onChange={this.handleChange} />
-                                <Button content='Save changes' labelPosition='left' icon='edit' primary />
+                                <Button content='Save changes' type='submit' labelPosition='left' icon='edit' primary />
                                 <Button content='Cancel' labelPosition='left' icon='cancel' secondary onClick={this.cancelEdit} />
                             </Item.Description>
                             <Divider />

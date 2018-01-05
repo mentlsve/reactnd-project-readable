@@ -114,3 +114,16 @@ export const createPost = (author, title, body, category) => {
     body: JSON.stringify(payload)
   }).then(res => res.json())
 }
+
+export const updatePost = (postId, title, body) => {
+  const payload = {
+    title,
+    body
+  }
+
+  return fetch(`${api}/posts/${postId}`, {
+    method: 'PUT',
+    headers: headersForJSONPayload,
+    body: JSON.stringify(payload)
+  }).then(res => res.json())
+}

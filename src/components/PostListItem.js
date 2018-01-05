@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, Item, Icon, Divider, Button, Label } from 'semantic-ui-react'
+import { Item, Icon, Divider, Button, Label } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { voteUpPost, voteDownPost, deletePost } from '../actions/post-actions'
 import { Link } from 'react-router-dom'

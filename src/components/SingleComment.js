@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Comment, Icon, Button, Label, Form, Divider } from 'semantic-ui-react'
+import { Comment, Button, Form, Divider } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { deleteComment, updateComment, voteUpComment, voteDownComment} from '../actions/comment-actions'
 import Timestamp from 'react-timestamp';
