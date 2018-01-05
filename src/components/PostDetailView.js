@@ -12,6 +12,12 @@ class PostDetailView extends Component {
         let editMode = this.props.location.state && this.props.location.state.editMode ? this.props.location.state.editMode : false
 
         const post = this.props.posts.find(post=> post.id === this.props.id)
+
+        if(typeof post === 'undefined') {
+            this.props.history.replace('/not-found-page')
+            return <div></div>
+        }
+
         return (
             <div className="ui left aligned container">
                 <SinglePost post={post} editMode={editMode} history={this.props.history} />
