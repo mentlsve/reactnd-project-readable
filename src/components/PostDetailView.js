@@ -14,7 +14,7 @@ class PostDetailView extends Component {
         const post = this.props.posts.find(post=> post.id === this.props.id)
         return (
             <div className="ui left aligned container">
-                <SinglePost post={post} editMode={editMode} />
+                <SinglePost post={post} editMode={editMode} history={this.props.history} />
                 <CommentList comments={this.props.comments} post={post} />
             </div>
         )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Item, Icon, Divider, Button, Label, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { voteUpPost, voteDownPost, updatePost } from '../actions/post-actions'
+import { voteUpPost, voteDownPost, updatePost, deletePost } from '../actions/post-actions'
 
 class SinglePost extends Component {
 
@@ -28,7 +28,6 @@ class SinglePost extends Component {
     }
 
     cancelEdit = () => {
-
         this.setState({ editMode: false })
     }
 
@@ -49,6 +48,11 @@ class SinglePost extends Component {
             body: '',
             title: ''
         })
+    }
+
+    handleDelete = () => {
+        this.props.dispatch(deletePost(this.props.post))
+        this.props.history.push('/')
     }
 
     render() {
@@ -82,6 +86,9 @@ class SinglePost extends Component {
                                     </Button>
                                     <Button icon basic onClick={this.setEditMode} floated='right'>
                                         <Icon name='edit' />
+                                    </Button>
+                                    <Button icon basic floated='right' onClick={this.handleDelete}>
+                                        <Icon name='trash' />
                                     </Button>
                                 </Item.Extra>
                                 <Item.Header>
