@@ -33,23 +33,13 @@ class App extends Component {
           </Menu>
         </div>
 
-        <Route path="/" exact render={() => (
-          <PostList />
-        )} />
 
-        <Route path="/udacity" exact render={() => (
-          <PostList category='udacity' />
-        )} />
+        <Route path="/" exact component={PostList} />
 
-        <Route path="/redux" exact render={() => (
-          <PostList category='redux' />
-        )} />
+        <Route path="/create-post" exact component={CreatePost} />
 
-        <Route path="/react" exact render={() => (
-          <PostList category='react' />
-        )} />
+        <Route path="/:category" exact component={PostList} />
 
-        <Route path="/create-post" component={CreatePost} />
         <Route path="/:category/:post_id" component={PostDetailView} />
 
       </div>

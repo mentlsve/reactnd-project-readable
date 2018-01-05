@@ -23,12 +23,10 @@ class PostList extends Component {
     }
 
     render() {
-        console.log('props', this.props)
-
         let posts = []
 
         if (this.props.posts && this.props.posts.length > 0) {
-            posts = this.props.category ? this.props.posts.filter(post => post.category === this.props.category) : this.props.posts
+            posts = (this.props.match && this.props.match.params && this.props.match.params.category) ? this.props.posts.filter(post => post.category === this.props.match.params.category) : this.props.posts
         }
 
         posts.sort(sortBy(this.state.sortByProperty));
